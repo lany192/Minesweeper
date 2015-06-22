@@ -7,6 +7,7 @@
     <TableRow
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:padding="8dp">
 
         <TextView
@@ -17,7 +18,7 @@
             android:gravity="center_horizontal"
             android:padding="5dip"
             android:text="000"
-            android:textColor="#FFFFFF"
+            android:textColor="@android:color/black"
             android:textSize="40sp" />
 
         <ImageButton
@@ -37,7 +38,7 @@
             android:gravity="center_horizontal"
             android:padding="5dip"
             android:text="000"
-            android:textColor="#FFFFFF"
+            android:textColor="@android:color/black"
             android:textSize="40sp" />
     </TableRow>
 
