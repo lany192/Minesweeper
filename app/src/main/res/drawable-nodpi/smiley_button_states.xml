@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:layout_width="48px" android:layout_height="48px" android:drawable="@drawable/smile" android:state_focused="true" android:state_pressed="false"/>
-    <item android:layout_width="48px" android:layout_height="48px" android:drawable="@drawable/surprise" android:state_focused="true" android:state_pressed="true"/>
-    <item android:layout_width="48px" android:layout_height="48px" android:drawable="@drawable/surprise" android:state_focused="false" android:state_pressed="true"/>
-    <item android:layout_width="48px" android:layout_height="48px" android:drawable="@drawable/smile"/>
+    <item android:layout_width="48dp" android:layout_height="48dp" android:drawable="@drawable/smile" android:state_focused="true" android:state_pressed="false"/>
+    <item android:layout_width="48dp" android:layout_height="48dp" android:drawable="@drawable/surprise" android:state_focused="true" android:state_pressed="true"/>
+    <item android:layout_width="48dp" android:layout_height="48dp" android:drawable="@drawable/surprise" android:state_focused="false" android:state_pressed="true"/>
+    <item android:layout_width="48dp" android:layout_height="48dp" android:drawable="@drawable/smile"/>
 
 </selector>
