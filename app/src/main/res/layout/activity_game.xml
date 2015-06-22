@@ -4,12 +4,15 @@
     android:layout_height="fill_parent"
     android:stretchColumns="0,2" >
 
-    <TableRow>
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/Timer"
             android:layout_width="fill_parent"
-            android:layout_height="48px"
+            android:layout_height="wrap_content"
             android:layout_column="0"
             android:gravity="center_horizontal"
             android:padding="5dip"
@@ -19,8 +22,8 @@
 
         <ImageButton
             android:id="@+id/Smiley"
-            android:layout_width="48px"
-            android:layout_height="48px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_column="1"
             android:background="@drawable/smiley_button_states"
             android:padding="5dip"
@@ -29,7 +32,7 @@
         <TextView
             android:id="@+id/MineCount"
             android:layout_width="fill_parent"
-            android:layout_height="48px"
+            android:layout_height="wrap_content"
             android:layout_column="2"
             android:gravity="center_horizontal"
             android:padding="5dip"
