@@ -41,7 +41,9 @@
             android:textSize="40sp" />
     </TableRow>
 
-    <TableRow>
+    <TableRow android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">>
 
         <TextView
             android:layout_width="fill_parent"
@@ -51,7 +53,9 @@
             android:padding="10dip" />
     </TableRow>
 
-    <TableRow>
+    <TableRow android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">>
 
         <TableLayout
             android:id="@+id/MineField"
@@ -59,7 +63,7 @@
             android:layout_height="260dp"
             android:layout_span="3"
             android:gravity="bottom"
-            android:padding="5dip"
+            android:padding="8dp"
             android:stretchColumns="*" >
         </TableLayout>
     </TableRow>

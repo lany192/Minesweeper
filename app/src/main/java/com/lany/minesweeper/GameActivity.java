@@ -26,8 +26,8 @@ public class GameActivity extends AppCompatActivity {
     private TableLayout mineField; // table layout to add mines to
 
     private Block blocks[][]; // blocks for mine field
-    private int blockDimension = 24; // width of each block
-    private int blockPadding = 2; // padding between blocks
+    private int blockDimension = 64; // width of each block
+    private int blockPadding = 8; // padding between blocks
 
 
     private int numberOfRowsInMineField = 9;
