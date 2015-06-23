@@ -7,14 +7,19 @@ import android.os.Bundle;
 
 import com.lany.minesweeper.R;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
+    @Override
+    protected boolean hasActionBar() {
+        return false;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+    protected int getLayoutId() {
+        return R.layout.activity_splash;
+    }
 
-
+    @Override
+    protected void init(Bundle savedInstanceState) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -22,7 +27,6 @@ public class SplashActivity extends AppCompatActivity {
                 finish();
             }
         }, 2000);
-
     }
 
 }

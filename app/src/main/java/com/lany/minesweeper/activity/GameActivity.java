@@ -22,7 +22,7 @@ import com.lany.minesweeper.R;
 
 import java.util.Random;
 
-public class GameActivity extends AppCompatActivity{
+public class GameActivity extends BaseActivity{
     private TextView txtMineCount;
     private TextView txtTimer;
     private ImageButton btnSmile;
@@ -48,9 +48,12 @@ public class GameActivity extends AppCompatActivity{
     private TextView mGameHintText;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
+    protected int getLayoutId() {
+        return R.layout.activity_game;
+    }
+
+    @Override
+    protected void init(Bundle savedInstanceState) {
         initView();
         initData();
     }
