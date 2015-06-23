@@ -7,7 +7,7 @@
     <string name="start_game_hint">Click smiley to start New Game</string>
     <string name="title_activity_record">RecordActivity</string>
     <string name="record">record</string>
-    <string name="clear_record">clear</string>
+    <string name="clear_record">clear record</string>
     <string name="current_best_record_empty">Empty record</string>
     <string name="second">Second</string>
 </resources>

@@ -14,6 +14,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center"
+        android:layout_gravity="center"
         android:text="@string/current_best_record_empty"
         android:visibility="gone" />
 
