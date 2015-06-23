@@ -32,7 +32,7 @@ public class GameActivity extends AppCompatActivity{
     private int blockDimension = 64; // width of each block
     private int blockPadding = 8; // padding between blocks
 
-    private int numberOfRowsInMineField = 16;
+    private int numberOfRowsInMineField = 14;
     private int numberOfColumnsInMineField = 8;
     private int totalNumberOfMines = 20;
 
