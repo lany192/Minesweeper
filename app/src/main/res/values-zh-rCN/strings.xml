@@ -6,5 +6,6 @@
     <string name="start_game_hint">点击笑脸开始游戏</string>
     <string name="record">最佳记录</string>
     <string name="clear_record">清除记录</string>
+    <string name="current_best_record_empty">当前没有获胜记录</string>
 
 </resources>

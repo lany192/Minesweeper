@@ -14,7 +14,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center"
-        android:text="当前没有游戏记录"
+        android:text="@string/current_best_record_empty"
         android:visibility="gone" />
 
 </LinearLayout>
