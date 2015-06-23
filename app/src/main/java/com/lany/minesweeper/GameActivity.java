@@ -37,6 +37,8 @@ public class GameActivity extends AppCompatActivity{
     private boolean isGameOver;
     private int minesToFind; // number of mines yet to be discovered
 
+    private TextView mGameHintText;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +52,7 @@ public class GameActivity extends AppCompatActivity{
         txtTimer = (TextView) findViewById(R.id.Timer);
         btnSmile = (ImageButton) findViewById(R.id.Smiley);
         mineField = (TableLayout) findViewById(R.id.MineField);
+        mGameHintText=(TextView)findViewById(R.id.game_hint_text);
     }
 
     private void initData() {
@@ -67,7 +70,7 @@ public class GameActivity extends AppCompatActivity{
             }
         });
 
-        showDialog(getString(R.string.start_game_hint), true, false);
+        mGameHintText.setText(R.string.start_game_hint);
     }
 
     /**
@@ -78,7 +81,7 @@ public class GameActivity extends AppCompatActivity{
         createMineField();
         // display all blocks in UI
         showMineField();
-
+        mGameHintText.setText("");
         minesToFind = totalNumberOfMines;
         isGameOver = false;
         secondsPassed = 0;
@@ -409,10 +412,10 @@ public class GameActivity extends AppCompatActivity{
                 }
             }
         }
-
-        // show message
-        showDialog("You won in " + Integer.toString(secondsPassed)
-                + " seconds!",  false, true);
+        String message="You won in " + Integer.toString(secondsPassed)
+                + " seconds!";
+        showDialog(message,  false, true);
+        mGameHintText.setText(message);
     }
 
     /**
@@ -458,9 +461,11 @@ public class GameActivity extends AppCompatActivity{
         // trigger mine
         blocks[currentRow][currentColumn].triggerMine();
 
-        // show message
-        showDialog("You tried for " + Integer.toString(secondsPassed)
-                + " seconds!",  false, false);
+
+        String message="You tried for " + Integer.toString(secondsPassed)
+                + " seconds!";
+        showDialog(message, false, false);
+        mGameHintText.setText(message);
     }
 
     /**
