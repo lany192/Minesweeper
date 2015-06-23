@@ -2,35 +2,27 @@ package com.lany.minesweeper;
 
 import android.content.DialogInterface;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Random;
 
-public class GameActivity extends AppCompatActivity {
-
-
+public class GameActivity extends AppCompatActivity{
     private TextView txtMineCount;
     private TextView txtTimer;
     private ImageButton btnSmile;
-
     private TableLayout mineField; // table layout to add mines to
 
     private Block blocks[][]; // blocks for mine field
     private int blockDimension = 64; // width of each block
     private int blockPadding = 8; // padding between blocks
-
 
     private int numberOfRowsInMineField = 16;
     private int numberOfColumnsInMineField = 8;
@@ -49,17 +41,24 @@ public class GameActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        initView();
+        initData();
+    }
 
+    private void initView() {
         txtMineCount = (TextView) findViewById(R.id.MineCount);
         txtTimer = (TextView) findViewById(R.id.Timer);
+        btnSmile = (ImageButton) findViewById(R.id.Smiley);
+        mineField = (TableLayout) findViewById(R.id.MineField);
+    }
 
+    private void initData() {
         // set font style for timer and mine count to LCD style
         Typeface lcdFont = Typeface.createFromAsset(getAssets(),
                 "fonts/lcd2mono.ttf");
         txtMineCount.setTypeface(lcdFont);
         txtTimer.setTypeface(lcdFont);
 
-        btnSmile = (ImageButton) findViewById(R.id.Smiley);
         btnSmile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,11 +67,12 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        mineField = (TableLayout) findViewById(R.id.MineField);
-
-        showDialog(getString(R.string.start_game_hint),  true, false);
+        showDialog(getString(R.string.start_game_hint), true, false);
     }
 
+    /**
+     * 开始新游戏
+     */
     private void startNewGame() {
         // plant mines and do rest of the calculations
         createMineField();
@@ -84,6 +84,9 @@ public class GameActivity extends AppCompatActivity {
         secondsPassed = 0;
     }
 
+    /**
+     * 显示雷区
+     */
     private void showMineField() {
         // remember we will not show 0th and last Row and Columns
         // they are used for calculation purposes only
@@ -109,6 +112,9 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 结束退出游戏
+     */
     private void endExistingGame() {
         stopTimer(); // stop if timer is running
         txtTimer.setText("000"); // revert all text
@@ -125,6 +131,9 @@ public class GameActivity extends AppCompatActivity {
         minesToFind = 0;
     }
 
+    /**
+     * 创建雷区
+     */
     private void createMineField() {
         // we take one row extra row for each side
         // overall two extra rows and two extra columns
@@ -344,6 +353,10 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 检查是否获胜
+     * @return
+     */
     private boolean checkGameWin() {
         for (int row = 1; row < numberOfRowsInMineField + 1; row++) {
             for (int column = 1; column < numberOfColumnsInMineField + 1; column++) {
@@ -356,6 +369,9 @@ public class GameActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * 更新界面
+     */
     private void updateMineCountDisplay() {
         if (minesToFind < 0) {
             txtMineCount.setText(Integer.toString(minesToFind));
@@ -368,6 +384,9 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 游戏获胜
+     */
     private void winGame() {
         stopTimer();
         isTimerStarted = false;
@@ -396,6 +415,11 @@ public class GameActivity extends AppCompatActivity {
                 + " seconds!",  false, true);
     }
 
+    /**
+     * 结束游戏
+     * @param currentRow
+     * @param currentColumn
+     */
     private void finishGame(int currentRow, int currentColumn) {
         isGameOver = true; // mark game as over
         stopTimer(); // stop timer
@@ -439,6 +463,11 @@ public class GameActivity extends AppCompatActivity {
                 + " seconds!",  false, false);
     }
 
+    /**
+     * 布雷
+     * @param currentRow
+     * @param currentColumn
+     */
     private void setMines(int currentRow, int currentColumn) {
         // set mines excluding the location where user clicked
         Random rand = new Random();
@@ -529,6 +558,9 @@ public class GameActivity extends AppCompatActivity {
         return;
     }
 
+    /**
+     * 开始计时
+     */
     public void startTimer() {
         if (secondsPassed == 0) {
             timer.removeCallbacks(updateTimeElasped);
@@ -537,6 +569,9 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 停止计时
+     */
     public void stopTimer() {
         // disable call backs
         timer.removeCallbacks(updateTimeElasped);
@@ -589,4 +624,5 @@ public class GameActivity extends AppCompatActivity {
 //        });
         builder.create().show();
     }
+
 }
