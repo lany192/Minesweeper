@@ -1,7 +1,9 @@
 package com.lany.minesweeper;
 
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -68,7 +70,7 @@ public class GameActivity extends AppCompatActivity {
 
         mineField = (TableLayout) findViewById(R.id.MineField);
 
-        showDialog("Click smiley to start New Game", 2000, true, false);
+        showDialog(getString(R.string.start_game_hint),  true, false);
     }
 
     private void startNewGame() {
@@ -391,7 +393,7 @@ public class GameActivity extends AppCompatActivity {
 
         // show message
         showDialog("You won in " + Integer.toString(secondsPassed)
-                + " seconds!", 1000, false, true);
+                + " seconds!",  false, true);
     }
 
     private void finishGame(int currentRow, int currentColumn) {
@@ -434,7 +436,7 @@ public class GameActivity extends AppCompatActivity {
 
         // show message
         showDialog("You tried for " + Integer.toString(secondsPassed)
-                + " seconds!", 1000, false, false);
+                + " seconds!",  false, false);
     }
 
     private void setMines(int currentRow, int currentColumn) {
@@ -562,24 +564,29 @@ public class GameActivity extends AppCompatActivity {
         }
     };
 
-    private void showDialog(String message, int milliseconds,
-                            boolean useSmileImage, boolean useCoolImage) {
-        // show message
-        Toast dialog = Toast.makeText(getApplicationContext(), message,
-                Toast.LENGTH_LONG);
-
-        dialog.setGravity(Gravity.CENTER, 0, 0);
-        LinearLayout dialogView = (LinearLayout) dialog.getView();
-        ImageView coolImage = new ImageView(getApplicationContext());
+    private void showDialog(String message,boolean useSmileImage, boolean useCoolImage) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         if (useSmileImage) {
-            coolImage.setImageResource(R.drawable.smile);
+            builder.setIcon(R.drawable.smile);
         } else if (useCoolImage) {
-            coolImage.setImageResource(R.drawable.cool);
+            builder.setIcon(R.drawable.cool);
         } else {
-            coolImage.setImageResource(R.drawable.sad);
+            builder.setIcon(R.drawable.sad);
         }
-        dialogView.addView(coolImage, 0);
-        dialog.setDuration(milliseconds);
-        dialog.show();
+        builder.setMessage(message);
+        builder.setTitle("提示");
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+//        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+//            @Override
+//             public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//        }
+//        });
+        builder.create().show();
     }
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <string name="app_name">扫雷</string>
+    <string name="action_settings">设置</string>
+    <string name="title_activity_game">扫雷</string>
+    <string name="start_game_hint">点击笑脸开始游戏</string>
+
+</resources>
