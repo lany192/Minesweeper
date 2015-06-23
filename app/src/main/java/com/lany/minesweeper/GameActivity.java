@@ -30,9 +30,9 @@ public class GameActivity extends AppCompatActivity {
     private int blockPadding = 8; // padding between blocks
 
 
-    private int numberOfRowsInMineField = 9;
-    private int numberOfColumnsInMineField = 9;
-    private int totalNumberOfMines = 10;
+    private int numberOfRowsInMineField = 16;
+    private int numberOfColumnsInMineField = 8;
+    private int totalNumberOfMines = 20;
 
     // timer to keep track of time elapsed
     private Handler timer = new Handler();

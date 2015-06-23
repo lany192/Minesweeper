@@ -35,14 +35,14 @@ public class Block extends Button {
         isClickable = true;
         numberOfMinesInSurrounding = 0;
 
-        this.setBackgroundResource(R.drawable.square_blue);
+        this.setBackgroundResource(R.drawable.btn_blue);
         setBoldFont();
     }
 
     // mark the block as disabled/opened
     // update the number of nearby mines
     public void setNumberOfSurroundingMines(int number) {
-        this.setBackgroundResource(R.drawable.square_grey);
+        this.setBackgroundResource(R.drawable.btn_grey);
 
         updateNumber(number);
     }
@@ -53,7 +53,7 @@ public class Block extends Button {
         this.setText("M");
 
         if (!enabled) {
-            this.setBackgroundResource(R.drawable.square_grey);
+            this.setBackgroundResource(R.drawable.btn_grey);
             this.setTextColor(Color.RED);
         } else {
             this.setTextColor(Color.BLACK);
@@ -66,7 +66,7 @@ public class Block extends Button {
         this.setText("F");
 
         if (!enabled) {
-            this.setBackgroundResource(R.drawable.square_grey);
+            this.setBackgroundResource(R.drawable.btn_grey);
             this.setTextColor(Color.RED);
         } else {
             this.setTextColor(Color.BLACK);
@@ -79,7 +79,7 @@ public class Block extends Button {
         this.setText("?");
 
         if (!enabled) {
-            this.setBackgroundResource(R.drawable.square_grey);
+            this.setBackgroundResource(R.drawable.btn_grey);
             this.setTextColor(Color.RED);
         } else {
             this.setTextColor(Color.BLACK);
@@ -90,9 +90,9 @@ public class Block extends Button {
     // else enable/close it
     public void setBlockAsDisabled(boolean enabled) {
         if (!enabled) {
-            this.setBackgroundResource(R.drawable.square_grey);
+            this.setBackgroundResource(R.drawable.btn_grey);
         } else {
-            this.setBackgroundResource(R.drawable.square_blue);
+            this.setBackgroundResource(R.drawable.btn_blue);
         }
     }
 
