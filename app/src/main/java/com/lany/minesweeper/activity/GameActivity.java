@@ -1,16 +1,24 @@
-package com.lany.minesweeper;
+package com.lany.minesweeper.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.lany.minesweeper.entity.Record;
+import com.lany.minesweeper.widget.Block;
+import com.lany.minesweeper.R;
 
 import java.util.Random;
 
@@ -414,8 +422,13 @@ public class GameActivity extends AppCompatActivity{
         }
         String message="You won in " + Integer.toString(secondsPassed)
                 + " seconds!";
-        showDialog(message,  false, true);
+        showDialog(message, false, true);
         mGameHintText.setText(message);
+
+        Record record = new Record();
+        record.setRecordCreateTime(System.currentTimeMillis());
+        record.setRecordValue(secondsPassed);
+        record.save();
     }
 
     /**
@@ -619,6 +632,9 @@ public class GameActivity extends AppCompatActivity{
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+
+
+
             }
         });
 //        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -630,4 +646,24 @@ public class GameActivity extends AppCompatActivity{
         builder.create().show();
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_game, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.game_menu_record) {
+            startActivity(new Intent(this,RecordActivity.class));
+            return true;
+        }
+        if (id == R.id.game_menu_settings) {
+            startActivity(new Intent(this,SettingsActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

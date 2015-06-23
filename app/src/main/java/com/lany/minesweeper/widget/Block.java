@@ -1,10 +1,12 @@
-package com.lany.minesweeper;
+package com.lany.minesweeper.widget;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.Button;
+
+import com.lany.minesweeper.R;
 
 public class Block extends Button {
     private boolean isCovered; // is block covered yet
