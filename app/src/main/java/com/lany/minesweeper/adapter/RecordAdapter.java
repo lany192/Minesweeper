@@ -70,7 +70,7 @@ public class RecordAdapter extends BaseAdapter {
             if (!TextUtils.isEmpty(time)) {
                 viewHolder.createTimeText.setText(time);
             }
-            viewHolder.recordValuseText.setText("" + record.getRecordValue());
+            viewHolder.recordValuseText.setText(record.getRecordValue() + mContext.getString(R.string.second));
         }
         return convertView;
     }

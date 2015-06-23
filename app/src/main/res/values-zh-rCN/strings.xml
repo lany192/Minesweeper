@@ -7,5 +7,6 @@
     <string name="record">最佳记录</string>
     <string name="clear_record">清除记录</string>
     <string name="current_best_record_empty">当前没有获胜记录</string>
+    <string name="second">秒</string>
 
 </resources>

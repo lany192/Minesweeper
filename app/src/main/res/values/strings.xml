@@ -8,5 +8,6 @@
     <string name="title_activity_record">RecordActivity</string>
     <string name="record">record</string>
     <string name="clear_record">clear</string>
-    <string name="current_best_record_empty">当前没有游戏记录</string>
+    <string name="current_best_record_empty">Empty record</string>
+    <string name="second">Second</string>
 </resources>
