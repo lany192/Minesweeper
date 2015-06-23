@@ -26,10 +26,6 @@
             android:name=".activity.RecordActivity"
             android:label="@string/record" >
         </activity>
-        <activity
-            android:name=".activity.SettingsActivity"
-            android:label="@string/title_activity_settings" >
-        </activity>
     </application>
 
 </manifest>

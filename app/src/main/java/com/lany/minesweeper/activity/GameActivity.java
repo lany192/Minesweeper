@@ -664,7 +664,8 @@ public class GameActivity extends BaseActivity{
             return true;
         }
         if (id == R.id.game_menu_settings) {
-            startActivity(new Intent(this,SettingsActivity.class));
+           // startActivity(new Intent(this,SettingsActivity.class));
+            Toast.makeText(this,"该功能暂未开放",Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
