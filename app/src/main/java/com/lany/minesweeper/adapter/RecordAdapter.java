@@ -19,7 +19,7 @@ import java.util.List;
 public class RecordAdapter extends BaseAdapter {
     private Context mContext;
     private List<Record> mRecordLists;
-    private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd H:m:s");
+    private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 
     public RecordAdapter(Context context, List<Record> records) {
