@@ -13,9 +13,6 @@ import com.lany.minesweeper.entity.Record;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-/**
- * Created by user on 2015/6/23.
- */
 public class RecordAdapter extends BaseAdapter {
     private Context mContext;
     private List<Record> mRecordLists;
