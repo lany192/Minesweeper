@@ -96,6 +96,7 @@ public class GameActivity extends BaseActivity{
         minesToFind = totalNumberOfMines;
         isGameOver = false;
         secondsPassed = 0;
+        txtMineCount.setText("0"+totalNumberOfMines);
     }
 
     /**
