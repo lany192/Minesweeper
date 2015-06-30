@@ -108,9 +108,7 @@ public class GameActivity extends BaseActivity{
         for (int row = 1; row < numberOfRowsInMineField + 1; row++) {
             TableRow tableRow = new TableRow(this);
             tableRow.setLayoutParams(new TableRow.LayoutParams(
-                    (blockDimension + 2 * blockPadding)
-                            * numberOfColumnsInMineField, blockDimension + 2
-                    * blockPadding));
+                    (blockDimension + 2 * blockPadding) * numberOfColumnsInMineField, blockDimension + 2 * blockPadding));
 
             for (int column = 1; column < numberOfColumnsInMineField + 1; column++) {
                 blocks[row][column].setLayoutParams(new TableRow.LayoutParams(
