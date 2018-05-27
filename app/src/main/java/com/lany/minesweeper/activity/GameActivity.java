@@ -6,7 +6,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,17 +15,26 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lany.box.activity.BaseActivity;
+import com.lany.minesweeper.R;
 import com.lany.minesweeper.entity.Record;
 import com.lany.minesweeper.widget.Block;
-import com.lany.minesweeper.R;
 
 import java.util.Random;
 
-public class GameActivity extends BaseActivity{
-    private TextView txtMineCount;
-    private TextView txtTimer;
-    private ImageButton btnSmile;
-    private TableLayout mineField; // table layout to add mines to
+import butterknife.BindView;
+
+public class GameActivity extends BaseActivity {
+    @BindView(R.id.Timer)
+    TextView mTimerText;
+    @BindView(R.id.Smiley)
+    ImageButton mSmileyBtn;
+    @BindView(R.id.MineCount)
+    TextView mMineCountText;
+    @BindView(R.id.game_hint_text)
+    TextView mGameHintText;
+    @BindView(R.id.MineField)
+    TableLayout mMineFieldView;
 
     private Block blocks[][]; // blocks for mine field
     private int blockDimension = 64; // width of each block
@@ -45,43 +53,29 @@ public class GameActivity extends BaseActivity{
     private boolean isGameOver;
     private int minesToFind; // number of mines yet to be discovered
 
-    private TextView mGameHintText;
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_game;
     }
 
     @Override
+    protected boolean hasBackBtn() {
+        return false;
+    }
+
+    @Override
     protected void init(Bundle savedInstanceState) {
-        initView();
-        initData();
-    }
-
-    private void initView() {
-        txtMineCount = (TextView) findViewById(R.id.MineCount);
-        txtTimer = (TextView) findViewById(R.id.Timer);
-        btnSmile = (ImageButton) findViewById(R.id.Smiley);
-        mineField = (TableLayout) findViewById(R.id.MineField);
-        mGameHintText=(TextView)findViewById(R.id.game_hint_text);
-    }
-
-    private void initData() {
         // set font style for timer and mine count to LCD style
-        Typeface lcdFont = Typeface.createFromAsset(getAssets(),
-                "fonts/lcd2mono.ttf");
-        txtMineCount.setTypeface(lcdFont);
-        txtTimer.setTypeface(lcdFont);
-
-        btnSmile.setOnClickListener(new View.OnClickListener() {
+        Typeface lcdFont = Typeface.createFromAsset(getAssets(), "fonts/lcd2mono.ttf");
+        mTimerText.setTypeface(lcdFont);
+        mMineCountText.setTypeface(lcdFont);
+        mSmileyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 endExistingGame();
                 startNewGame();
             }
         });
-
-        mGameHintText.setText(R.string.start_game_hint);
     }
 
     /**
@@ -96,7 +90,7 @@ public class GameActivity extends BaseActivity{
         minesToFind = totalNumberOfMines;
         isGameOver = false;
         secondsPassed = 0;
-        txtMineCount.setText("0"+totalNumberOfMines);
+        mTimerText.setText("0" + totalNumberOfMines);
     }
 
     /**
@@ -118,7 +112,7 @@ public class GameActivity extends BaseActivity{
                         blockPadding, blockPadding);
                 tableRow.addView(blocks[row][column]);
             }
-            mineField.addView(tableRow, new TableLayout.LayoutParams(
+            mMineFieldView.addView(tableRow, new TableLayout.LayoutParams(
                     (blockDimension + 2 * blockPadding)
                             * numberOfColumnsInMineField, blockDimension + 2
                     * blockPadding));
@@ -130,12 +124,12 @@ public class GameActivity extends BaseActivity{
      */
     private void endExistingGame() {
         stopTimer(); // stop if timer is running
-        txtTimer.setText("000"); // revert all text
-        txtMineCount.setText("000"); // revert mines count
-        btnSmile.setBackgroundResource(R.drawable.smile);
+        mMineCountText.setText("000"); // revert all text
+        mTimerText.setText("000"); // revert mines count
+        mSmileyBtn.setBackgroundResource(R.drawable.smile);
 
-        // remove all rows from mineField TableLayout
-        mineField.removeAllViews();
+        // remove all rows from mMineFieldView TableLayout
+        mMineFieldView.removeAllViews();
 
         // set all variables to support end of game
         isTimerStarted = false;
@@ -368,6 +362,7 @@ public class GameActivity extends BaseActivity{
 
     /**
      * 检查是否获胜
+     *
      * @return
      */
     private boolean checkGameWin() {
@@ -387,13 +382,13 @@ public class GameActivity extends BaseActivity{
      */
     private void updateMineCountDisplay() {
         if (minesToFind < 0) {
-            txtMineCount.setText(Integer.toString(minesToFind));
+            mTimerText.setText(Integer.toString(minesToFind));
         } else if (minesToFind < 10) {
-            txtMineCount.setText("00" + Integer.toString(minesToFind));
+            mTimerText.setText("00" + Integer.toString(minesToFind));
         } else if (minesToFind < 100) {
-            txtMineCount.setText("0" + Integer.toString(minesToFind));
+            mTimerText.setText("0" + Integer.toString(minesToFind));
         } else {
-            txtMineCount.setText(Integer.toString(minesToFind));
+            mTimerText.setText(Integer.toString(minesToFind));
         }
     }
 
@@ -407,7 +402,7 @@ public class GameActivity extends BaseActivity{
         minesToFind = 0; // set mine count to 0
 
         // set icon to cool dude
-        btnSmile.setBackgroundResource(R.drawable.cool);
+        mSmileyBtn.setBackgroundResource(R.drawable.cool);
 
         updateMineCountDisplay(); // update mine count
 
@@ -422,7 +417,7 @@ public class GameActivity extends BaseActivity{
                 }
             }
         }
-        String message="You won in " + Integer.toString(secondsPassed)
+        String message = "You won in " + Integer.toString(secondsPassed)
                 + " seconds!";
         showDialog(message, false, true);
         mGameHintText.setText(message);
@@ -435,6 +430,7 @@ public class GameActivity extends BaseActivity{
 
     /**
      * 结束游戏
+     *
      * @param currentRow
      * @param currentColumn
      */
@@ -442,7 +438,7 @@ public class GameActivity extends BaseActivity{
         isGameOver = true; // mark game as over
         stopTimer(); // stop timer
         isTimerStarted = false;
-        btnSmile.setBackgroundResource(R.drawable.sad);
+        mSmileyBtn.setBackgroundResource(R.drawable.sad);
 
         // show all mines
         // disable all blocks
@@ -477,7 +473,7 @@ public class GameActivity extends BaseActivity{
         blocks[currentRow][currentColumn].triggerMine();
 
 
-        String message="You tried for " + Integer.toString(secondsPassed)
+        String message = "You tried for " + Integer.toString(secondsPassed)
                 + " seconds!";
         showDialog(message, false, false);
         mGameHintText.setText(message);
@@ -485,6 +481,7 @@ public class GameActivity extends BaseActivity{
 
     /**
      * 布雷
+     *
      * @param currentRow
      * @param currentColumn
      */
@@ -604,11 +601,11 @@ public class GameActivity extends BaseActivity{
             ++secondsPassed;
 
             if (secondsPassed < 10) {
-                txtTimer.setText("00" + Integer.toString(secondsPassed));
+                mMineCountText.setText("00" + Integer.toString(secondsPassed));
             } else if (secondsPassed < 100) {
-                txtTimer.setText("0" + Integer.toString(secondsPassed));
+                mMineCountText.setText("0" + Integer.toString(secondsPassed));
             } else {
-                txtTimer.setText(Integer.toString(secondsPassed));
+                mMineCountText.setText(Integer.toString(secondsPassed));
             }
 
             // add notification
@@ -619,7 +616,7 @@ public class GameActivity extends BaseActivity{
         }
     };
 
-    private void showDialog(String message,boolean useSmileImage, boolean useCoolImage) {
+    private void showDialog(String message, boolean useSmileImage, boolean useCoolImage) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         if (useSmileImage) {
             builder.setIcon(R.drawable.smile);
@@ -636,15 +633,8 @@ public class GameActivity extends BaseActivity{
                 dialog.dismiss();
 
 
-
             }
         });
-//        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-//            @Override
-//             public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//        }
-//        });
         builder.create().show();
     }
 
@@ -659,12 +649,12 @@ public class GameActivity extends BaseActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.game_menu_record) {
-            startActivity(new Intent(this,RecordActivity.class));
+            startActivity(new Intent(this, RecordActivity.class));
             return true;
         }
         if (id == R.id.game_menu_settings) {
-           // startActivity(new Intent(this,SettingsActivity.class));
-            Toast.makeText(this,"该功能暂未开放",Toast.LENGTH_SHORT).show();
+            // startActivity(new Intent(this,SettingsActivity.class));
+            Toast.makeText(this, "该功能暂未开放", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);

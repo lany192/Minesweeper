@@ -1,15 +1,16 @@
 package com.lany.minesweeper.activity;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
 
+import com.lany.box.activity.BaseActivity;
 import com.lany.minesweeper.R;
 
 public class SplashActivity extends BaseActivity {
+
     @Override
-    protected boolean hasActionBar() {
+    protected boolean hasToolbar() {
         return false;
     }
 
